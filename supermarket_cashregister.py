@@ -1,8 +1,12 @@
 
+# Se crea una funcion para imprimir una linea de guiones, dependiendo del valor que se le pase como parametro.
 def printHyphen(number):
     print("-" * number)
 
+# Creacion de una funcion para aplicar el descuento al total de la compra.Dependiendo de como el usuario desea pagar si con efectivo o tarjeta y el monto total asi dependera el descuento a aplicar.
 def applyDiscount(totalAmount):
+    
+    # Solicitamos al usuario una opcion de como desea pagar la cuenta, si en efectivo o con tarjeta.
     printHyphen(45)
     print("\tHow do you want to pay?")
     printHyphen(45)
@@ -11,6 +15,7 @@ def applyDiscount(totalAmount):
     printHyphen(45)
     option = int(input("Option:" + "\t"))
     
+    # Dependiendo de la opcion se aplica el descuento correspondiente y el total gastado en la compra.
     discount = 0.0
     if option == 1:
         print("You have paid with cash")
@@ -32,15 +37,18 @@ def applyDiscount(totalAmount):
         print("Invalid option")
     return discount
 
+# Creacion de una funcion para guardar los datos de los productos que el usuario ingrese.
 def saveProduct(codProduct, nameProduct, quantityProduct, priceProduct):
     return {"Codigo": codProduct, "Nombre": nameProduct, "Cantidad": quantityProduct, "Precio": priceProduct, "Total": (quantityProduct * priceProduct)}
 
+# Creacion de una funcion para calcular el total de la compra.
 def totalAmount(listBuyOut):
     total = 0.0
     for i in listBuyOut:
         total += i["Total"]
     return total
 
+# Creacion de una funcion para imprimir los productos que el usuario ingreso.
 def printBuyOut(listBuyOut):
     numberProduct = 1
     
@@ -62,6 +70,7 @@ def printBuyOut(listBuyOut):
         print("\n")
         numberProduct+=1
 
+# Creacion de una funcion para imprimir el total descrito en la compra de manera especifica, el subtotal, descuento y el total a pagar.
 def printTotalBuyOut(buyOut, discount):
     printHyphen(28)
     print("\tTotal Buyout")
@@ -73,6 +82,7 @@ def printTotalBuyOut(buyOut, discount):
     print("Total: $ ", (totalAmount(buyOut) - discount))
     printHyphen(28)
 
+# Creacion de la funcion principal que se encargara de ejecutar todas las funciones anteriores y se conforma como el programa final.
 def cashRegister():
     buyOut = []
     
@@ -82,6 +92,7 @@ def cashRegister():
     printHyphen(45)
     print("\n")
     
+    # Mientras el usuario no ingrese una opcion de salida, seguira ejecutando el programa.Recolectando la informacion de los productos adquiridos.
     while(True):
         printHyphen(45)
         codProduct = input("Please enter the id of the item: \n" + "ID:" + "\t")
@@ -101,11 +112,13 @@ def cashRegister():
         
         buyOut.append(saveProduct(codProduct, nameProduct, quantityProduct, priceProduct))
         
+        # Se solicita al usuario si desea continuar comprando o no.
         printHyphen(75)
         addMoreProduct = int(input(
             "Do you want to add another product?, select the corresponding number!: \n 1 = Yes\n 2 = No\n" + "Option:" + "\t"))
         printHyphen(75)
         
+        # Segun la opcion seguira o no comprando.
         if addMoreProduct == 1:
             continue
         elif addMoreProduct == 2:
@@ -119,6 +132,5 @@ def cashRegister():
             printBuyOut(buyOut)
             printTotalBuyOut(buyOut, discount)
             break
-
 
 cashRegister()
